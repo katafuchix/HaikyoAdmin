@@ -26,6 +26,11 @@ public class IndexController {
 			System.out.println(l);
 			System.out.println(l.getName());
 		});
+		
+		for (HaikyoCategoryDocument d: list){
+			  System.out.println(d);
+			  System.out.println(d);
+			}
 		return "index";
 
 	}
