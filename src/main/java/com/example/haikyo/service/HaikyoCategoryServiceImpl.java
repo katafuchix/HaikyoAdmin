@@ -1,7 +1,5 @@
 package com.example.haikyo.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -22,13 +20,16 @@ public class HaikyoCategoryServiceImpl implements HaikyoCategoryService {
 		return repository.findById(id).block();
 	}
 	
+    @Override
 	public HaikyoCategoryDocument findByName(String name) {
 		return repository.findByName(name).block();
 	}
 	
 	@Override
-	public List<HaikyoCategoryDocument> findAllBy(Pageable pageable){
-		return repository.findAllBy(pageable).collectList().block();
+	public Page<HaikyoCategoryDocument> findAllBy(Pageable pageable){
+		return repository.findAllBy(pageable).collectList()
+				.zipWith(repository.count())
+			    .map(p -> new PageImpl<>(p.getT1(), pageable, p.getT2())).block();
 		
 	}
 	

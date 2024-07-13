@@ -1,7 +1,5 @@
 package com.example.haikyo.service;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -13,7 +11,7 @@ public interface HaikyoCategoryService {
 	
 	public HaikyoCategoryDocument findByName(String name);
 	
-	public List<HaikyoCategoryDocument> findAllBy(Pageable pageable);
+	public Page<HaikyoCategoryDocument> findAllBy(Pageable pageable);
 	
 	public Page<HaikyoCategoryDocument> findAll(Pageable pageable);
 }
