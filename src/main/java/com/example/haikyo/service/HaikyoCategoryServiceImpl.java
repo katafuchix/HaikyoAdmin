@@ -34,7 +34,8 @@ public class HaikyoCategoryServiceImpl implements HaikyoCategoryService {
 	
 	@Override
 	public Page<HaikyoCategoryDocument> findAll(Pageable pageable){
-		return repository.findAllBy(pageable)
+		return repository//.findAllBy(pageable)
+				.findAllByOrderByHaikyocategoryIdAsc(pageable)
 				.collectList()
 				.zipWith(repository.count())
 			    .map(p -> new PageImpl<>(p.getT1(), pageable, p.getT2())).block();

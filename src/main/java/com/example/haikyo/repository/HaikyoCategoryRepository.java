@@ -8,7 +8,7 @@ import com.google.cloud.spring.data.firestore.FirestoreReactiveRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public interface HaikyoCategoryRepository extends FirestoreReactiveRepository<HaikyoCategoryDocument> {
+public interface HaikyoCategoryRepository extends FirestoreReactiveRepository<HaikyoCategoryDocument>, CustomHaikyoCategoryRepository {
 
 	Mono<HaikyoCategoryDocument> findByName(String Name);
 	
@@ -16,5 +16,5 @@ public interface HaikyoCategoryRepository extends FirestoreReactiveRepository<Ha
 
 	Flux<HaikyoCategoryDocument> findAllBy(Pageable pageable);
 	
-	//Flux<HaikyoCategoryDocument> findAllByOrderByTableidAsc(Pageable pageable);
+	Flux<HaikyoCategoryDocument> findAllByOrderByHaikyocategoryIdAsc(Pageable pageable);
 }

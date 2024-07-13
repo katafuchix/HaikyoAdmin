@@ -47,7 +47,8 @@ public class IndexController {
 		Page<HaikyoCategoryDocument> p = service.findAll(pageable);
 		model.addAttribute("p", p);
 		 
-		return "index";
+		// https://qiita.com/RabbitAATS/items/8711c21c58c1f8e832ec
+		return "/index";
 
 	}
 }
