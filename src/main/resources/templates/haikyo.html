@@ -38,8 +38,9 @@
                   <table class="table table-borderless">
                     <thead>
                       <tr>
-                        <th scope="col" width="20%">id</th>
+                        <th scope="col" width="5%">id</th>
                         <th scope="col">name</th>
+                        <th scope="col">state</th>
                         <th scope="col">address</th>
                         <th scope="col">url</th>
                       </tr>
@@ -48,6 +49,7 @@
 					<tr th:each="item : ${p.content}" th:object="${item}">
 						<td>[[${item.id}]]</td>
 						<td>[[${item.name}]]</td>
+						<td>[[${item.state}]]</td>
 						<td>[[${item.address}]]</td>
 						<td>
 							<a th:href="@{${item.url}}" href="#" target="_blank">
@@ -115,7 +117,7 @@
 					    </li>
 					    <li th:class="${p.last} ? 'page-item disabled' : 'page-item'" class="page-item disabled">
 							<th:block th:if="(${p.last} == false )">
-					        <a th:href="@{${path}(page=${p.totalPages - 1})}" class="page-link" href="#" tabindex="-1">
+					        <a th:href="@{${path}(page=${p.totalPages})}" class="page-link" href="#" tabindex="-1">
 								<span aria-hidden="true">»</span>
 							</a>
 					    	</th:block>

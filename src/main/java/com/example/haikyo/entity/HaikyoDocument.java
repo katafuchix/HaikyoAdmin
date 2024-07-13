@@ -13,6 +13,7 @@ public class HaikyoDocument {
 	private Integer haikyo_category_id;
 	private String url;
 	private String address;
+	private String state;
 	
 	public Long getId() {
 		return id;
@@ -54,4 +55,12 @@ public class HaikyoDocument {
 		this.address = address;
 	}
 
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+	
 }
