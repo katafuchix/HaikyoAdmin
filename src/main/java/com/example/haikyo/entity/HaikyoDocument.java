@@ -1,6 +1,8 @@
 package com.example.haikyo.entity;
 
+import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.annotation.DocumentId;
+import com.google.cloud.firestore.annotation.ServerTimestamp;
 import com.google.cloud.spring.data.firestore.Document;
 
 @Document(collectionName = "haikyo_detail_fear")
@@ -14,7 +16,10 @@ public class HaikyoDocument {
 	private String url;
 	private String address;
 	private String state;
-	
+	//private Date created_at;
+    @ServerTimestamp
+    private Timestamp created_at; 
+    
 	public Long getId() {
 		return id;
 	}
@@ -61,6 +66,14 @@ public class HaikyoDocument {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public Timestamp getCreated_at() {
+		return created_at;
+	}
+
+	public void setCreated_at(Timestamp created_at) {
+		this.created_at = created_at;
 	}
 	
 }

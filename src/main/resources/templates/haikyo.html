@@ -42,6 +42,7 @@
                         <th scope="col">name</th>
                         <th scope="col">state</th>
                         <th scope="col">address</th>
+                        <th scope="col">created_at</th>
                         <th scope="col">url</th>
                       </tr>
                     </thead>
@@ -51,6 +52,9 @@
 						<td>[[${item.name}]]</td>
 						<td>[[${item.state}]]</td>
 						<td>[[${item.address}]]</td>
+						<td>
+							[[${#dates.format(item.created_at, 'yyyy-MM-dd HH:mm')}]]
+						</td>
 						<td>
 							<a th:href="@{${item.url}}" href="#" target="_blank">
 								[[${item.url}]]
