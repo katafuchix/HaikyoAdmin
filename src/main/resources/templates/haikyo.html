@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!--/* layout:decorateで埋め込み先を定義 */-->
+<html lang="ja" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>コンテンツ</title>
+</head>
+<body>
+    <!--/* layoutに埋め込む部分を定義 */-->
+    <span layout:fragment="contents">
+
+    <div class="pagetitle">
+      <h1>Dashboard</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+          <div class="row">
+
+            <!-- Top Selling -->
+            <div class="col-12">
+              <div class="card top-selling overflow-auto">
+
+                <div class="card-body pb-0">
+                  <h5 class="card-title">CATEGORY <span>| </span></h5>
+
+                  <table class="table table-borderless">
+                    <thead>
+                      <tr>
+                        <th scope="col" width="20%">id</th>
+                        <th scope="col">name</th>
+                        <th scope="col">address</th>
+                        <th scope="col">url</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+					<tr th:each="item : ${p.content}" th:object="${item}">
+						<td>[[${item.id}]]</td>
+						<td>[[${item.name}]]</td>
+						<td>[[${item.address}]]</td>
+						<td>
+							<a th:href="@{${item.url}}" href="#" target="_blank">
+								[[${item.url}]]
+							</a>
+						</td>
+					</tr>
+                    </tbody>
+                  </table>
+              
+                </div>
+                
+				<div class="card-footer">
+					<nav aria-label="Page navigation">
+					<ul class="pagination justify-content-center">
+						
+						<li th:class="${p.first} ? 'page-item disabled' : 'page-item'" class="page-item disabled">
+							<th:block th:if="(${p.first} == false )">
+					        <a th:href="@{${path}(page=1)}" class="page-link" href="#" tabindex="-1">
+								<span aria-hidden="true">«</span>
+							</a>
+					   		</th:block>
+					    </li>
+					    
+					    <!-- 前のページの戻る -->
+					    <li th:class="${p.first} ? 'page-item disabled' : 'page-item'" class="page-item disabled">
+							<th:block th:if="(${p.first} == false )">
+					        <a th:href="@{${path}(page=${p.number})}" class="page-link" href="#" tabindex="-1">
+								<span aria-hidden="true">‹</span>
+							</a>
+					   		</th:block>
+					   		<th:block th:if="(${p.first} == true )"> 
+							<a class="page-link" href="#" tabindex="-1">
+								<span aria-hidden="true">«</span>
+							</a>
+							</th:block>
+					    </li>
+					    <!-- 総数とページあたりの件数をもとにページ分割 -->
+					    <!--
+					    <th:block th:each="i : ${#numbers.sequence(0, p.totalPages - 1)}">
+					        <li th:class="(${i} == ${p.number}) ? 'page-item active' : 'page-item'" >
+								<a th:text="${i + 1}" th:href="@{${path}(page=${i + 1})}" class="page-link" href="#">3</a></li>
+					    </th:block>
+					    -->
+					    
+					    <!-- 前後5ページのリンク -->
+			            <li th:each="i : ${#numbers.sequence(p.number - 5, p.number + 5)}"
+			            	  th:class="(${i} == ${p.number}) ? 'page-item active' : 'page-item'"
+			                  th:if="${i >= 0 and i < p.totalPages}">
+			                <a class="page-link"  th:href="@{${path}(page=${i + 1})}" th:text="${i + 1}">1</a>
+			            </li>
+            
+					    <!-- 次のページへ進む -->
+					    <li th:class="${p.last} ? 'page-item disabled' : 'page-item'" class="page-item disabled">
+							<th:block th:if="(${p.last} == false )">
+					        <a th:href="@{${path}(page=${p.number + 2})}" class="page-link" href="#" tabindex="-1">
+								<span aria-hidden="true">›</span>
+							</a>
+					    	</th:block>
+					    	<th:block th:if="(${p.last} == true )">
+								<a class="page-link" href="#" tabindex="-1">
+								<span aria-hidden="true">»</span>
+							</a>
+					    	</th:block>
+					    </li>
+					    <li th:class="${p.last} ? 'page-item disabled' : 'page-item'" class="page-item disabled">
+							<th:block th:if="(${p.last} == false )">
+					        <a th:href="@{${path}(page=${p.totalPages - 1})}" class="page-link" href="#" tabindex="-1">
+								<span aria-hidden="true">»</span>
+							</a>
+					    	</th:block>
+					    </li>
+					</ul>
+					</nav>
+				</div>
+				
+            </div><!-- End Top Selling -->
+
+
+          </div>
+        </div><!-- End Left side columns -->
+
+      </div>
+    </section>
+    
+    </span>
+    
+</body>
+</html>
