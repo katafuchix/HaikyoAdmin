@@ -3,6 +3,7 @@ package com.example.haikyo.config;
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 @Configuration
+@ComponentScan(basePackages = "com.example.haikyo") // スキャンできないことがあるため
 public class CustomWebMvcConfigurationSupport extends WebMvcConfigurationSupport {
 	
 	@Bean
